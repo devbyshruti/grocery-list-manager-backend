@@ -37,18 +37,21 @@ export const getSuggestedRecipes = async (req, res) => {
       return res.status(400).json({ message: recipeError.message });
 
  
-    const suggestions = recipes.map(recipe => {
-      const missingIngredients = recipe.ingredients.filter(
-        ingredient =>
-          !pantryNames.includes(ingredient.toLowerCase())
-      );
+  const suggestions = recipes.map(recipe => {
+  const ingredients = Array.isArray(recipe.ingredients)
+    ? recipe.ingredients
+    : [];
 
-      return {
-       name: recipe.name,
-       missingIngredients,
-       missingCount: missingIngredients.length
-    };
-  })
+  const missingIngredients = ingredients.filter(
+    ingredient => !pantryNames.includes(ingredient.toLowerCase())
+  );
+
+  return {
+    name: recipe.name,
+    missingIngredients,
+    missingCount: missingIngredients.length
+  };
+})
   .sort((a, b) => a.missingCount - b.missingCount);
     res.json({
       totalRecipesChecked: recipes.length,

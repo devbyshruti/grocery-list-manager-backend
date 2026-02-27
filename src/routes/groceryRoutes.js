@@ -10,11 +10,11 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+router.get("/total", protect, getTotalBudget);
+
 router.route("/")
   .post(protect, createItem)
   .get(protect, getItems);
-
-  router.get("/total", protect, getTotalBudget); 
 
 router.route("/:id")
   .put(protect, updateItem)
