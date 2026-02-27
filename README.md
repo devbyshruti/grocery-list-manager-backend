@@ -125,3 +125,4 @@ npm run dev
 # Deployment
 
 Backend deployed on Render (or your preferred host)
+Live API Link: https://grocery-list-manager-backend.onrender.com
