@@ -39,8 +39,7 @@ export const deletePantryItem = async (req, res) => {
       .from("pantry_items")
       .delete()
       .eq("id", id)
-      .eq("user_id", req.user.id); // make sure user can delete only their items
-
+      .eq("user_id", req.user.id);
     if (error) return res.status(400).json({ message: error.message });
 
     if (!data || data.length === 0)
